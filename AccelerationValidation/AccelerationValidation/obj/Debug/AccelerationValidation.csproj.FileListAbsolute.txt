@@ -1,0 +1,16 @@
+E:\Software\AccelerationValidation\AccelerationValidation\bin\Debug\AccelerationValidation.exe.config
+E:\Software\AccelerationValidation\AccelerationValidation\bin\Debug\AccelerationValidation.exe
+E:\Software\AccelerationValidation\AccelerationValidation\bin\Debug\AccelerationValidation.pdb
+E:\Software\AccelerationValidation\AccelerationValidation\obj\Debug\AccelerationValidation.csproj.AssemblyReference.cache
+E:\Software\AccelerationValidation\AccelerationValidation\obj\Debug\App.g.cs
+E:\Software\AccelerationValidation\AccelerationValidation\obj\Debug\AccelerationValidation_MarkupCompile.cache
+E:\Software\AccelerationValidation\AccelerationValidation\obj\Debug\AccelerationValidation_MarkupCompile.lref
+E:\Software\AccelerationValidation\AccelerationValidation\obj\Debug\AccelerationValidation.g.resources
+E:\Software\AccelerationValidation\AccelerationValidation\obj\Debug\AccelerationValidation.Properties.Resources.resources
+E:\Software\AccelerationValidation\AccelerationValidation\obj\Debug\AccelerationValidation.csproj.GenerateResource.cache
+E:\Software\AccelerationValidation\AccelerationValidation\obj\Debug\AccelerationValidation.csproj.CoreCompileInputs.cache
+E:\Software\AccelerationValidation\AccelerationValidation\obj\Debug\AccelerationValidation.exe
+E:\Software\AccelerationValidation\AccelerationValidation\obj\Debug\AccelerationValidation.pdb
+E:\Software\AccelerationValidation\AccelerationValidation\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\Software\AccelerationValidation\AccelerationValidation\obj\Debug\DefineProtocol.g.cs
+E:\Software\AccelerationValidation\AccelerationValidation\obj\Debug\DefineProtocol.baml

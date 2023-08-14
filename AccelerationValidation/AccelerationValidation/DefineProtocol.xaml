@@ -1,0 +1,117 @@
+﻿<Window x:Class="AccelerationValidation.DefineProtocol"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AccelerationValidation"
+        mc:Ignorable="d"
+        Title="Define Protocol" Height="300" Width="400"
+        Loaded="Window_Loaded">
+    
+
+    <Window.Resources>
+        <Style x:Key="labelStyle" TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="LightBlue"/>
+        </Style>
+        <local:BoolToOppositeBoolConverter x:Key="boolToOppositeBoolConverter"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions >
+            <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <DataGrid Name="gridTransitions" Margin="0,0,0,3" Grid.Row="0"
+                    CanUserAddRows="False" 
+                    SelectionChanged="gridTransitions_SelectionChanged"
+                    AutoGenerateColumns="False" 
+                    RowHeaderWidth="27"
+                    ItemsSource="{Binding Path=Transitions}" 
+                    RowEditEnding="gridTransitions_RowEditEnding" 
+                    BeginningEdit="gridTransitions_BeginningEdit"
+                    >
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Style.Triggers>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="Background" Value="Red"/>
+                            <Setter Property="ToolTip" 
+                            Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                                    Path=(Validation.Errors)[0].ErrorContent}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Time (s)" x:Name="TimeField" CanUserSort="False">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Time" 
+                           UpdateSourceTrigger="PropertyChanged" 
+                           NotifyOnValidationError="True"
+                           ValidatesOnExceptions="True">
+                            <Binding.ValidationRules>
+                                <local:TimeValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Speed (rpm)" x:Name="SpeedField" CanUserSort="False">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="RPM" 
+                           UpdateSourceTrigger="PropertyChanged" 
+                           NotifyOnValidationError="True"
+                           ValidatesOnExceptions="True">
+                            <Binding.ValidationRules>
+                                <local:SpeedValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+
+            <DataGrid.RowValidationRules>
+                <local:AccelerationValidationRule ValidationStep="UpdatedValue" />
+            </DataGrid.RowValidationRules>
+
+            <DataGrid.RowValidationErrorTemplate>
+                <ControlTemplate>
+                    <Grid Margin="0,-2,0,-2"
+                      ToolTip="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                                    AncestorType={x:Type DataGridRow}},
+                                    Path=(Validation.Errors)[0].ErrorContent}">
+                        <Ellipse StrokeThickness="0" Fill="Red" 
+                          Width="{TemplateBinding FontSize}" 
+                          Height="{TemplateBinding FontSize}" />
+                        <TextBlock Text="!" FontSize="{TemplateBinding FontSize}" 
+                              FontWeight="Bold" Foreground="White" 
+                              HorizontalAlignment="Center"  />
+                    </Grid>
+                </ControlTemplate>
+            </DataGrid.RowValidationErrorTemplate>
+
+
+        </DataGrid>
+
+        <UniformGrid Grid.Row="1" Rows="1" Columns="2">
+            <Button Grid.Column="0" Padding="5" Name="btnAddTrans" Click="btnAddTrans_Click">_Add</Button>
+            <Button Grid.Column="1" Padding="5" Name="btnDelTrans" IsEnabled="False" Click="btnDelTrans_Click">_Delete</Button>
+        </UniformGrid>
+
+        <DockPanel Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="2" >
+            <Button Margin="2" Padding="5" Width="50" Name="btnOk" Click="btnOk_Click"
+              Content="_OK"
+              ToolTip="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=TheError}"
+              ToolTipService.ShowOnDisabled="True"
+              ToolTipService.IsEnabled="{Binding ElementName=btnOk, Path=IsEnabled,
+                                         Converter={StaticResource boolToOppositeBoolConverter}}"
+              >
+            </Button>
+            <Button Margin="2" Padding="5" Width="50" Name="btnCancel" Click="btnCancel_Click">_Cancel</Button>
+        </DockPanel>
+
+    </Grid>
+</Window>
